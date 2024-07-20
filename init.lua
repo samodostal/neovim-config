@@ -1,2 +1,4 @@
-vim.opt.relativenumber = true
-vim.opt.number = true
+require "core.options"
+require "core.keymaps"
+
+require "plugins-install"
