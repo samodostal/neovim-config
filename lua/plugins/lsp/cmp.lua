@@ -2,16 +2,13 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
-			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
 			local cmp = require "cmp"
-			local lspkind = require "lspkind"
 
 			cmp.setup {
 				sources = {
@@ -42,12 +39,6 @@ return {
 					["<C-k>"] = cmp.mapping(function()
 						return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
 					end, { "i", "s" }),
-				},
-				formatting = {
-					format = lspkind.cmp_format {
-						mode = "symbol_text",
-						show_labelDetails = true,
-					},
 				},
 				snippet = {
 					expand = function(args)

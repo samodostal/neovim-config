@@ -39,4 +39,8 @@ return {
 		"abecodes/tabout.nvim",
 		opts = {},
 	},
+	{
+		"kylechui/nvim-surround",
+		opts = {},
+	},
 }

@@ -44,7 +44,8 @@ opt.shortmess:append "c"
 opt.list = true
 opt.listchars = { eol = "↴", tab = "┃ " }
 
-vim.opt.statusline = "%!v:lua.require('core.statusline').setup()"
+opt.conceallevel = 2
+opt.statusline = "%!v:lua.require('core.statusline').setup()"
 
 -- formatoptions overriden by ftplugin (:verbose set formatoptions)
 vim.api.nvim_create_autocmd("FileType", {

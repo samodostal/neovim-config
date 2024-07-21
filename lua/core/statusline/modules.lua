@@ -41,12 +41,13 @@ M.fileInfo = function()
 	local filename = (vim.fn.expand "%" == "" and "Empty ") or vim.fn.expand "%:t"
 
 	if filename ~= "Empty " then
-		local devicons_present, devicons = pcall(require, "nvim-web-devicons")
-
-		if devicons_present then
-			local ft_icon = devicons.get_icon(filename)
-			icon = (ft_icon ~= nil and " " .. ft_icon) or ""
+		local devicons = safe_require("nvim-web-devicons", true)
+		if not devicons then
+			return
 		end
+
+		local ft_icon = devicons.get_icon(filename)
+		icon = (ft_icon ~= nil and " " .. ft_icon) or ""
 
 		filename = " " .. filename .. " "
 	end
@@ -122,8 +123,8 @@ M.lsp_status = function()
 end
 
 M.linters_status = function()
-	local nvim_lint_present, nvim_lint = pcall(require, "lint")
-	if not nvim_lint_present then
+	local nvim_lint = safe_require("lint", true)
+	if not nvim_lint then
 		return
 	end
 
@@ -141,8 +142,8 @@ M.linters_status = function()
 end
 
 M.formatters_status = function()
-	local conform_present, conform = pcall(require, "conform")
-	if not conform_present then
+	local conform = safe_require("conform", true)
+	if not conform then
 		return
 	end
 

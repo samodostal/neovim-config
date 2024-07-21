@@ -35,4 +35,5 @@ return {
 			signs = false,
 		},
 	},
+	{ "MunifTanjim/nui.nvim", lazy = false },
 }
