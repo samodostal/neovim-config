@@ -1,4 +1,4 @@
-local on_attach = function(client, bufnr)
+local on_attach = function(client)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.semanticTokensProvider = nil
 end

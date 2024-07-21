@@ -19,7 +19,8 @@ return {
 			local packages_formatters = {}
 			for _, ft_with_formatters in pairs(packages.formatters_with_ft) do
 				for _, package in ipairs(ft_with_formatters) do
-					local package_parsed = package:gsub("_", "-") -- Conform.nvim names some packages with '_' instead of correctly using '-'. :/
+					-- Conform.nvim names some packages with '_' instead of correctly using '-'. :/
+					local package_parsed = package:gsub("_", "-")
 					table.insert(packages_formatters, package_parsed)
 				end
 			end

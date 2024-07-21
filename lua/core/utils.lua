@@ -2,7 +2,7 @@ local M = {}
 
 --- Safely requires a module
 --- @param module string: The name of the module to require
---- @param silent boolean: If true, suppresses error notifications (optional)
+--- @param silent boolean|nil: If true, suppresses error notifications (optional)
 --- @return any: The required module, or nil if the module could not be loaded
 function _G.safe_require(module, silent)
 	silent = silent or false
