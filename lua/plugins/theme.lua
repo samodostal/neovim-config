@@ -36,4 +36,20 @@ return {
 		},
 	},
 	{ "MunifTanjim/nui.nvim", lazy = false },
+	{
+		"2kabhishek/nerdy.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("telescope").load_extension "nerdy"
+		end,
+		keys = {
+			{
+				"<leader>fi",
+				"<cmd>lua require('telescope').extensions.nerdy.nerdy()<cr>",
+				desc = "Open nerd icons picker",
+			},
+		},
+	},
 }
