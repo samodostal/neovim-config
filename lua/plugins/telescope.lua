@@ -42,4 +42,8 @@ return {
 			require("telescope").load_extension "fzf"
 		end,
 	},
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
 }
