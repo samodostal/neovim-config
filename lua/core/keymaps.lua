@@ -14,3 +14,5 @@ map_menu("Neovim management", "<leader>nn", {
 	{ text = "Mason", cmd = ":Mason" },
 	{ text = "LSP info", cmd = ":LspInfo" },
 })
+
+map("n", "<leader>cc", "<cmd>lua require('core.compiler').compile_and_run()<cr>")
