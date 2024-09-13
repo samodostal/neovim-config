@@ -13,12 +13,13 @@ return {
 				},
 				file_ignore_patterns = {
 					"dist/.*",
+					"node_modules/.*",
 					"%.git/.*",
 					"%.vim/.*",
-					"node_modules/.*",
 					"%.idea/.*",
 					"%.vscode/.*",
 					"%.history/.*",
+					"flake.lock",
 				},
 				mappings = {
 					i = {
