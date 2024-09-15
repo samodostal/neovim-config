@@ -8,6 +8,8 @@ map("n", "<leader>t", ":b#<CR>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+map("t", "<esc>", "<c-\\><c-n>")
+
 map_menu("Neovim management", "<leader>nn", {
 	{ text = "Check health", cmd = ":checkhealth" },
 	{ text = "Lazy", cmd = ":Lazy" },
