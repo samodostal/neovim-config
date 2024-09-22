@@ -19,6 +19,7 @@ local commands = {
 	go = "go run %s",
 	python = "python3 %",
 	haskell = "runhaskell %s",
+	sh = "%s",
 }
 
 M.compile_and_run = function()
