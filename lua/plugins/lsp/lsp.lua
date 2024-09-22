@@ -29,6 +29,15 @@ return {
 				end,
 			}
 
+			vim.diagnostic.config {
+				signs = false,
+				severity_sort = true,
+				float = {
+					header = "",
+					source = true,
+				},
+			}
+
 			map("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
 			map("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
 			map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
