@@ -1,11 +1,26 @@
 return {
 	{
-		"kdheepak/lazygit.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("toggleterm").setup {
+				persist_mode = true,
+				float_opts = {
+					border = "single",
+				},
+			}
+
+			local lazygit = require("toggleterm.terminal").Terminal:new {
+				cmd = "lazygit",
+				direction = "float",
+				hidden = true,
+			}
+
+			function _lazygit_toggle()
+				lazygit:toggle()
+			end
+		end,
 		keys = {
-			{ "<leader>gs", "<cmd>LazyGit<cr>", desc = "LazyGit open" },
-			{ "<leader>gc", "<cmd>LazyGitFilter<cr>", desc = "LazyGit filter" },
-			{ "<leader>gf", "<cmd>LazyGitFilterCurrentFile<cr>", desc = "LazyGit filter current file" },
+			{ "<leader>gs", "<cmd>lua _lazygit_toggle()<cr>", desc = "Open lazygit with toggleterm.nvim" },
 		},
 	},
 	{
