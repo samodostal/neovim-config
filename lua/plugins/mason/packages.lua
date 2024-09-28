@@ -12,7 +12,7 @@ M.lsp = {
 	"json-lsp",
 	"taplo",
 	"lemminx",
-	"ltex-ls",
+	-- "ltex-ls",
 
 	-- [ Unix ]
 	"nil",
@@ -72,7 +72,7 @@ M.dap = {
 
 -- Check linters availability at: https://github.com/mfussenegger/nvim-lint
 M.linters_with_ft = {
-	c = { "cpplint" },
+	cpp = { "cpplint" },
 	lua = { "luacheck" },
 	javascript = { "eslint" },
 	typescript = { "eslint" },
