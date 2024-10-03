@@ -25,6 +25,7 @@ return {
 					i = {
 						["<C-a>"] = require("telescope.actions").select_all,
 						["<C-q>"] = require("telescope.actions").send_selected_to_qflist,
+						["<esc>"] = require("telescope.actions").close,
 					},
 				},
 			},
