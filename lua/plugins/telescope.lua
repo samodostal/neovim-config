@@ -34,7 +34,7 @@ return {
 			{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Telescope find git files" },
 			{ "<leader>fr", "<cmd>Telescope live_grep<cr>", desc = "Telescope ripgrep files" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope ripgrep help files" },
-			{ "<leader>fp", "<cmd>Telescope resume<cr>", desc = "Telescope previous picker" },
+			{ "<leader>fc", "<cmd>Telescope resume<cr>", desc = "Telescope previous picker" },
 		},
 	},
 	{
