@@ -1,5 +1,6 @@
 local M = {}
 
+-- ':h lspconfig-setup'
 M.lsp_configurations = {
 	lua_ls = {
 		settings = {
@@ -16,6 +17,11 @@ M.lsp_configurations = {
 				schemas = require("schemastore").json.schemas(),
 				validate = { enable = true },
 			},
+		},
+	},
+	clangd = {
+		cmd = {
+			"/run/current-system/sw/bin/clangd",
 		},
 	},
 }
