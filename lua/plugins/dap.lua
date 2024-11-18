@@ -56,7 +56,7 @@ return {
 						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 					end,
 					cwd = "${workspaceFolder}",
-					stopAtEntry = true,
+					stopAtEntry = false,
 				},
 				{
 					name = "Attach to gdbserver :1234",
