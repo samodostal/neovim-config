@@ -36,8 +36,15 @@ return {
 		opts = {},
 	},
 	{
-		"abecodes/tabout.nvim",
-		opts = {},
+		"kawre/neotab.nvim",
+		opts = {
+			smart_punctuators = {
+				enabled = true,
+				semicolon = {
+					enabled = true,
+				},
+			},
+		},
 	},
 	{
 		"kylechui/nvim-surround",
