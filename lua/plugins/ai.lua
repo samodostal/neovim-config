@@ -17,4 +17,21 @@ return {
 			},
 		},
 	},
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			{ "zbirenbaum/copilot.lua" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+		build = "make tiktoken",
+		opts = {
+			question_header = "  User  ",
+			answer_header = "  Copilot  ",
+			error_header = "  Error  ",
+			show_folds = false,
+		},
+		keys = {
+			{ "<leader>gc", "<cmd>CopilotChat<cr>", mode = { "n", "v" } },
+		},
+	},
 }
