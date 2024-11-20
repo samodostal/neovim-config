@@ -1,4 +1,5 @@
 column_width = 120
 indent_type = "Tabs"
 no_call_parentheses = true
+collapse_simple_statement = "FunctionOnly"
 quote_style = "AutoPreferDouble"
