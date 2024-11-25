@@ -20,4 +20,13 @@ return {
 	-- Haskell: haskell-tools.nvim
 	-- Rust: rustaceanvim
 	-- Typescript: typescript-tools.nvim
+
+	-- Plant UML
+	{
+		"weirongxu/plantuml-previewer.vim",
+		dependencies = {
+			{ "tyru/open-browser.vim" },
+		},
+		lazy = false,
+	},
 }
