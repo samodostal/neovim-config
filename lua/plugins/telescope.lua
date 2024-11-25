@@ -33,7 +33,7 @@ return {
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
 			{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Telescope find git files" },
-			{ "<leader>fr", "<cmd>Telescope live_grep<cr>", desc = "Telescope ripgrep files" },
+			{ "<leader>fr", "<cmd>Telescope grep_string<cr>", desc = "Telescope ripgrep files" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope ripgrep help files" },
 			{ "<leader>fc", "<cmd>Telescope resume<cr>", desc = "Telescope previous picker" },
 		},
@@ -41,9 +41,7 @@ return {
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "make",
-		config = function()
-			require("telescope").load_extension "fzf"
-		end,
+		config = function() require("telescope").load_extension "fzf" end,
 	},
 	{
 		"stevearc/dressing.nvim",
