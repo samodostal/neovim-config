@@ -44,7 +44,7 @@ opt.shortmess:append "c"
 opt.list = true
 opt.listchars = { eol = "↴", tab = "┃ " }
 
-opt.conceallevel = 2
+opt.conceallevel = 0
 opt.statusline = "%!v:lua.require('core.statusline').setup()"
 
 -- formatoptions overriden by ftplugin (:verbose set formatoptions)
