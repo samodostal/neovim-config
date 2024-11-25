@@ -13,6 +13,7 @@ return {
 
 			cmp.setup {
 				sources = {
+					{ name = "luasnip" },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "lazydev" },
 					{ name = "nvim_lsp" },
@@ -35,17 +36,17 @@ return {
 						},
 						{ "i", "c" }
 					),
-					["<C-j>"] = cmp.mapping(function()
-						return vim.snippet.active { direction = 1 } and vim.snippet.jump(1)
-					end, { "i", "s" }),
-					["<C-k>"] = cmp.mapping(function()
-						return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
-					end, { "i", "s" }),
+					["<C-j>"] = cmp.mapping(
+						function() return vim.snippet.active { direction = 1 } and vim.snippet.jump(1) end,
+						{ "i", "s" }
+					),
+					["<C-k>"] = cmp.mapping(
+						function() return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1) end,
+						{ "i", "s" }
+					),
 				},
 				snippet = {
-					expand = function(args)
-						vim.snippet.expand(args.body)
-					end,
+					expand = function(args) vim.snippet.expand(args.body) end,
 				},
 			}
 		end,
