@@ -14,7 +14,10 @@ return {
 	},
 
 	-- JSON
-	{ "b0o/schemastore.nvim" },
+	{
+		"b0o/schemastore.nvim",
+		ft = "json",
+	},
 
 	-- Java: nvim-jdtls
 	-- Haskell: haskell-tools.nvim
