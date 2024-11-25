@@ -21,6 +21,12 @@ return {
 	-- Rust: rustaceanvim
 	-- Typescript: typescript-tools.nvim
 
+	-- C
+	{
+		"dhananjaylatkar/cscope_maps.nvim",
+		opts = {},
+	},
+
 	-- Plant UML
 	{
 		"weirongxu/plantuml-previewer.vim",
