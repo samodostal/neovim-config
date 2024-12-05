@@ -17,13 +17,12 @@ return {
 			{ "<leader>go", function() Snacks.gitbrowse() end, desc = "Git Browse" },
 			{ "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 			{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-			{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
 
 			-- Notifier
 			{ "<leader>ns", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },
 			{ "<leader>nh", function() Snacks.notifier.hide() end, desc = "Hide notifications" },
 
-			{ "<leader>rn", function() Snacks.rename.rename_file() end, desc = "LSP Rename file" },
+			{ "<leader>rf", function() Snacks.rename.rename_file() end, desc = "LSP Rename file" },
 
 			{
 				"<leader>N",
