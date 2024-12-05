@@ -14,11 +14,11 @@ return {
 							external_filetypes = { "pdf" },
 						},
 					},
-					["core.completion"] = {
-						config = {
-							engine = "nvim-cmp",
-						},
-					},
+					-- ["core.completion"] = {
+					-- 	config = {
+							-- engine = "nvim-cmp",
+					-- 	},
+					-- },
 					["core.dirman"] = {},
 				},
 			}

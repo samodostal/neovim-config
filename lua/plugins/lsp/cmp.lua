@@ -1,54 +1,48 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",
+		"Saghen/blink.cmp",
+		lazy = false,
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"saadparwaiz1/cmp_luasnip",
+			'rafamadriz/friendly-snippets',
 		},
-		config = function()
-			local cmp = require "cmp"
+		opts = {
+			sources = {
+				completion = {
+					enabled_providers = {
+						'snippets',
+						'lsp',
+						'path',
+						'buffer',
+					},
+				},
+			},
+			keymap = {
+				['<C-y>'] = { 'select_and_accept' },
 
-			cmp.setup {
-				sources = {
-					{ name = "luasnip" },
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "lazydev" },
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "buffer" },
+				['<C-p>'] = { 'select_prev', 'fallback' },
+				['<C-n>'] = { 'show', 'select_next', 'fallback' },
+
+				['<C-d>'] = { 'show_documentation', 'hide_documentation' },
+				['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+				['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+				['<C-j>'] = { 'snippet_forward', 'fallback' },
+				['<C-k>'] = { 'snippet_backward', 'fallback' },
+			},
+			documentation = {
+				auto_show = true,
+			},
+			completion = {
+				accept = {
+					auto_brackets = { enabled = true },
 				},
-				mapping = {
-					["<C-n>"] = cmp.mapping(function()
-						if cmp.visible() then
-							cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
-						else
-							cmp.complete()
-						end
-					end, { "i", "c" }),
-					["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-					["<C-y>"] = cmp.mapping(
-						cmp.mapping.confirm {
-							behavior = cmp.ConfirmBehavior.Insert,
-							select = true,
-						},
-						{ "i", "c" }
-					),
-					["<C-j>"] = cmp.mapping(
-						function() return vim.snippet.active { direction = 1 } and vim.snippet.jump(1) end,
-						{ "i", "s" }
-					),
-					["<C-k>"] = cmp.mapping(
-						function() return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1) end,
-						{ "i", "s" }
-					),
-				},
-				snippet = {
-					expand = function(args) vim.snippet.expand(args.body) end,
+			},
+			signature = {
+				enabled = true,
+				trigger = {
+					show_on_insert_or_trigger_character = true,
 				},
 			}
-		end,
-	},
+		}
+	}
 }
