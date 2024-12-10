@@ -47,9 +47,7 @@ end
 --- @param key string: The key to be mapped
 --- @param cmd string: The command to be executed when the key is pressed
 --- @param opts table|nil: The options for the keymap (optional)
-function M.map(mode, key, cmd, opts)
-	vim.api.nvim_set_keymap(mode, key, cmd, opts or { noremap = true, silent = true })
-end
+function M.map(mode, key, cmd, opts) vim.api.nvim_set_keymap(mode, key, cmd, opts or { noremap = true, silent = true }) end
 
 --- Sets up a menu with keybindings
 --- @param title string: The title of the menu
@@ -88,9 +86,7 @@ function M.map_menu(title, key, commands)
 			close = { "<Esc>", "q" },
 			submit = { "<CR>" },
 		},
-		on_submit = function(item)
-			vim.cmd(item.cmd)
-		end,
+		on_submit = function(item) vim.cmd(item.cmd) end,
 	})
 
 	local modes = { "n", "v" }
@@ -99,9 +95,7 @@ function M.map_menu(title, key, commands)
 		vim.api.nvim_set_keymap(mode, key, "", {
 			noremap = true,
 			silent = true,
-			callback = function()
-				menu:mount()
-			end,
+			callback = function() menu:mount() end,
 		})
 	end
 end

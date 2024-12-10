@@ -24,9 +24,7 @@ return {
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
+		config = function() require("colorizer").setup() end,
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -41,9 +39,7 @@ return {
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 		},
-		config = function()
-			require("telescope").load_extension "nerdy"
-		end,
+		config = function() require("telescope").load_extension "nerdy" end,
 		keys = {
 			{
 				"<leader>fi",

@@ -16,7 +16,7 @@ return {
 					},
 					-- ["core.completion"] = {
 					-- 	config = {
-							-- engine = "nvim-cmp",
+					-- engine = "nvim-cmp",
 					-- 	},
 					-- },
 					["core.dirman"] = {},

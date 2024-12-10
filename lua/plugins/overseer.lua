@@ -4,7 +4,7 @@ return {
 		opts = {
 			task_list = {
 				max_height = 0.6,
-				min_height = 0.6
+				min_height = 0.6,
 			},
 		},
 		keys = {

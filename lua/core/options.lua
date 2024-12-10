@@ -49,7 +49,5 @@ opt.statusline = "%!v:lua.require('core.statusline').setup()"
 
 -- formatoptions overriden by ftplugin (:verbose set formatoptions)
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function()
-		opt.formatoptions:remove "o"
-	end,
+	callback = function() opt.formatoptions:remove "o" end,
 })

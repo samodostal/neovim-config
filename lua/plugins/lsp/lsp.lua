@@ -8,7 +8,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
 			"neovim/nvim-lspconfig",
-			"saghen/blink.cmp"
+			"saghen/blink.cmp",
 		},
 		config = function()
 			local mason_lspconfig = require "mason-lspconfig"
@@ -24,7 +24,7 @@ return {
 					if not vim.tbl_contains(packages.managed_separately, server) then
 						local config = lsp_configurations[server] or {}
 						config.on_attach = on_attach
-						config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+						config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 
 						lspconfig[server].setup(config)
 					end
