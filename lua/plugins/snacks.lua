@@ -5,9 +5,15 @@ return {
 		lazy = false,
 		opts = {
 			bigfile = { enabled = true },
-			notifier = {
+			notifier = { enabled = true },
+			input = { enabled = true },
+			indent = {
 				enabled = true,
-				style = "compact",
+				scope = {
+					animate = {
+						enabled = false,
+					},
+				},
 			},
 		},
 		keys = {

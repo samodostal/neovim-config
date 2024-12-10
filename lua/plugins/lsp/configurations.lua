@@ -6,7 +6,7 @@ M.lsp_configurations = {
 		settings = {
 			Lua = {
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "Snacks" },
 				},
 			},
 		},

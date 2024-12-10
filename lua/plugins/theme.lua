@@ -12,6 +12,7 @@ return {
 					vim.api.nvim_set_hl(0, "FlashMatch", { fg = colors.yellow })
 					vim.api.nvim_set_hl(0, "FlashCurrent", { fg = colors.yellow })
 					vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#00FFFF" })
+					vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5a6075" })
 				end,
 			})
 
