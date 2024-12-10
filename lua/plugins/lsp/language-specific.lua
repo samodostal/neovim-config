@@ -25,10 +25,10 @@ return {
 	-- Typescript: typescript-tools.nvim
 
 	-- C
-	{
-		"dhananjaylatkar/cscope_maps.nvim",
-		opts = {},
-	},
+	-- {
+	-- 	"dhananjaylatkar/cscope_maps.nvim",
+	-- 	opts = {},
+	-- },
 
 	-- Plant UML
 	{
