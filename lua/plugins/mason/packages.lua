@@ -74,10 +74,10 @@ M.dap = {
 M.linters_with_ft = {
 	cpp = { "cpplint" },
 	lua = { "luacheck" },
-	javascript = { "eslint" },
-	typescript = { "eslint" },
-	javascriptreact = { "eslint" },
-	typescriptreact = { "eslint" },
+	javascript = { "eslint_d" },
+	typescript = { "eslint_d" },
+	javascriptreact = { "eslint_d" },
+	typescriptreact = { "eslint_d" },
 }
 
 -- Check formatters availability at: https://github.com/stevearc/conform.nvim
