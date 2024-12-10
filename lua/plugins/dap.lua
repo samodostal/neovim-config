@@ -44,6 +44,13 @@ return {
 				id = "cppdbg",
 				type = "executable",
 				command = vim.fn.stdpath "data" .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+				args = {},
+			}
+			dap.adapters.python = {
+				id = "python",
+				type = "executable",
+				command = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python",
+				args = { "-m", "debugpy.adapter" },
 			}
 
 			-- Configurations
@@ -52,9 +59,8 @@ return {
 					name = "Launch file",
 					type = "cppdbg",
 					request = "launch",
-					program = function()
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-					end,
+
+					program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
 					cwd = "${workspaceFolder}",
 					stopAtEntry = false,
 				},
@@ -62,13 +68,40 @@ return {
 					name = "Attach to gdbserver :1234",
 					type = "cppdbg",
 					request = "launch",
+
+					program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+					cwd = "${workspaceFolder}",
+					stopAtEntry = false,
 					MIMode = "gdb",
 					miDebuggerServerAddress = "localhost:1234",
 					miDebuggerPath = "/run/current-system/sw/bin/gdb",
-					cwd = "${workspaceFolder}",
-					program = function()
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-					end,
+				},
+			}
+			dap.configurations.python = {
+				{
+					name = "Launch file",
+					type = "python",
+					request = "launch",
+
+					program = "${file}",
+					pythonPath = function() return vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python" end,
+				},
+				{
+					name = "AOC Example data",
+					type = "python",
+					request = "launch",
+					program = "${file}",
+
+					pythonPath = function() return vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python" end,
+				},
+				{
+					name = "AOC Real data",
+					type = "python",
+					request = "launch",
+					program = "${file}",
+					args = { "--data", "./input.txt" },
+
+					pythonPath = function() return vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python" end,
 				},
 			}
 		end,
