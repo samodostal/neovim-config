@@ -46,4 +46,11 @@ return {
 		"kylechui/nvim-surround",
 		opts = {},
 	},
+	{
+		"johmsalas/text-case.nvim",
+		opts = {},
+		keys = {
+			{ "ga.", "<cmd>TextCaseOpenTelescope<cr>", desc = "Telescope" },
+		},
+	},
 }
