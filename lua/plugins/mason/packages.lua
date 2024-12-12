@@ -1,7 +1,9 @@
 local M = {}
 
 -- ! IMPORTANT ! - short names of packgaes
-M.managed_separately = {}
+M.managed_separately = {
+	"ts_ls"
+}
 
 -- ! IMPORTANT ! - short names of packgaes
 M.disable_inlayhints = {}
