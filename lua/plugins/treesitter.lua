@@ -28,4 +28,12 @@ return {
 		end,
 	},
 	{ "windwp/nvim-ts-autotag", opts = {} },
+	{
+		"utilyre/barbecue.nvim",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {},
+	},
 }
