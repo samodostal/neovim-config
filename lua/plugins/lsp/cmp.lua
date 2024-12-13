@@ -1,3 +1,11 @@
+local sources_short = {
+	Snippets = "[SNIP]",
+	Lazydev = "[LAZY]",
+	LSP = "[LSP]",
+	Path = "[PATH]",
+	Buffer = "[BUF]",
+}
+
 return {
 	{
 		"Saghen/blink.cmp",
@@ -45,6 +53,11 @@ return {
 							{ "label", "label_description", gap = 1 },
 							{ "kind_icon", gap = 1 },
 							{ "source_name" },
+						},
+						components = {
+							source_name = {
+								text = function(ctx) return sources_short[ctx.source_name] or ctx.source_name end,
+							},
 						},
 					},
 				},
