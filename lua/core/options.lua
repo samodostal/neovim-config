@@ -42,7 +42,7 @@ opt.completeopt = { "menu", "menuone", "noselect" }
 opt.shortmess:append "c"
 
 opt.list = true
-opt.listchars:append("eol:↴")
+opt.listchars:append "eol:↴"
 
 opt.conceallevel = 0
 opt.statusline = "%!v:lua.require('core.statusline').setup()"
