@@ -35,12 +35,22 @@ return {
 				["<C-j>"] = { "snippet_forward", "fallback" },
 				["<C-k>"] = { "snippet_backward", "fallback" },
 			},
-			documentation = {
-				auto_show = true,
-			},
 			completion = {
 				accept = {
 					auto_brackets = { enabled = true },
+				},
+				menu = {
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", gap = 1 },
+							{ "source_name" },
+						},
+					},
+				},
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 50,
 				},
 			},
 			signature = {
