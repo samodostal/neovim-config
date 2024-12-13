@@ -23,6 +23,7 @@ return {
 			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim" },
 		},
+		branch = "main",
 		build = "make tiktoken",
 		opts = {
 			question_header = "  User  ",
