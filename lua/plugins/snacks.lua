@@ -9,10 +9,8 @@ return {
 			input = { enabled = true },
 			indent = {
 				enabled = true,
-				scope = {
-					animate = {
-						enabled = false,
-					},
+				animate = {
+					enabled = false,
 				},
 			},
 		},
