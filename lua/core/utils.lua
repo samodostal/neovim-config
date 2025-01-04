@@ -100,4 +100,32 @@ function M.map_menu(title, key, commands)
 	end
 end
 
+function M.packages_by_ft_with_toolkits(packages_by_ft)
+	local output = {}
+
+	for ft, packages in pairs(packages_by_ft) do
+		if packages.toolkit == nil then
+			output[ft] = packages
+		else
+			output[ft] = { packages.toolkit }
+		end
+	end
+
+	return output
+end
+
+function M.packages_by_ft_with_commands(packages_by_ft)
+	local output = {}
+
+	for ft, packages in pairs(packages_by_ft) do
+		if packages.toolkit == nil then
+			output[ft] = packages
+		else
+			output[ft] = { packages.command }
+		end
+	end
+
+	return output
+end
+
 return M

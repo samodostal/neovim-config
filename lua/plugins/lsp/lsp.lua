@@ -31,6 +31,13 @@ return {
 				end,
 			}
 
+			-- Godot is weird
+			local config = {
+				on_attach = on_attach,
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			}
+			lspconfig.gdscript.setup(config)
+
 			vim.diagnostic.config {
 				signs = false,
 				severity_sort = true,

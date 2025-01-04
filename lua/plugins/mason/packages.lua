@@ -2,7 +2,7 @@ local M = {}
 
 -- ! IMPORTANT ! - short names of packgaes
 M.managed_separately = {
-	"ts_ls"
+	"ts_ls",
 }
 
 -- ! IMPORTANT ! - short names of packgaes
@@ -35,6 +35,9 @@ M.lsp = {
 	-- 'tailwindcss-language-server'
 	-- 'graphql-language-service-cli'
 	-- 'deno'
+
+	-- [ Game dev ]
+	"gdtoolkit",
 
 	-- [ Docker ]
 	"docker-compose-language-service",
@@ -80,6 +83,7 @@ M.linters_with_ft = {
 	typescript = { "eslint_d" },
 	javascriptreact = { "eslint_d" },
 	typescriptreact = { "eslint_d" },
+	gdscript = { toolkit = "gdtoolkit", command = "gdlint" },
 }
 
 -- Check formatters availability at: https://github.com/stevearc/conform.nvim
@@ -97,6 +101,7 @@ M.formatters_with_ft = {
 	haskell = { "ormolu" },
 	cs = { "csharpier" },
 	nix = { "nixpkgs_fmt" },
+	gdscript = { toolkit = "gdtoolkit", command = "gdformat" },
 }
 
 return M

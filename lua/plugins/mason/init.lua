@@ -10,14 +10,14 @@ return {
 			local utils = require "core.utils"
 
 			local packages_linters = {}
-			for _, ft_with_linters in pairs(packages.linters_with_ft) do
+			for _, ft_with_linters in pairs(utils.packages_by_ft_with_toolkits(packages.linters_with_ft)) do
 				for _, package in ipairs(ft_with_linters) do
 					table.insert(packages_linters, package)
 				end
 			end
 
 			local packages_formatters = {}
-			for _, ft_with_formatters in pairs(packages.formatters_with_ft) do
+			for _, ft_with_formatters in pairs(utils.packages_by_ft_with_toolkits(packages.formatters_with_ft)) do
 				for _, package in ipairs(ft_with_formatters) do
 					-- Conform.nvim names some packages with '_' instead of correctly using '-'. :/
 					local package_parsed = package:gsub("_", "-")
