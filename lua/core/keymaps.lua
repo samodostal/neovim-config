@@ -12,6 +12,16 @@ map("v", "<C-d>", "<C-d>")
 
 map("n", "<leader>t", ":b#<CR>")
 
+map(
+	"n",
+	"gch",
+	":lua if vim.g.comment_color == '#989db5' then "
+		.. "vim.cmd('highlight Comment guifg=#565f89') "
+		.. "vim.g.comment_color = '#565f89' else "
+		.. "vim.cmd('highlight Comment guifg=#989db5') "
+		.. "vim.g.comment_color = '#989db5' end<CR>"
+)
+
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
