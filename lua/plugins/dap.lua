@@ -52,6 +52,11 @@ return {
 				command = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python",
 				args = { "-m", "debugpy.adapter" },
 			}
+			dap.adapters.godot = {
+				type = "server",
+				host = "127.0.0.1",
+				port = 6006,
+			}
 
 			-- Configurations
 			dap.configurations.c = {
@@ -102,6 +107,14 @@ return {
 					args = { "--data", "./input.txt" },
 
 					pythonPath = function() return vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python" end,
+				},
+			}
+			dap.configurations.gdscript = {
+				{
+					type = "godot",
+					request = "launch",
+					name = "Launch scene",
+					project = "${workspaceFolder}",
 				},
 			}
 		end,
