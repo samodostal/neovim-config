@@ -17,7 +17,7 @@ M.lsp = {
 	-- "ltex-ls",
 
 	-- [ Unix ]
-	"nil",
+	-- "nil",
 	"ansible-language-server",
 	"bash-language-server",
 
