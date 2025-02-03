@@ -14,6 +14,7 @@ M.lsp = {
 	"json-lsp",
 	"taplo",
 	"lemminx",
+	"marksman",
 	-- "ltex-ls",
 
 	-- [ Unix ]
