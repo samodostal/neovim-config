@@ -1,9 +1,9 @@
 return {
 	{
 		"danymat/neogen",
-		-- opts = {
-		-- 	snippet_engine = "luasnip",
-		-- },
+		opts = {
+			enabled = true,
+		},
 		keys = {
 			{ "<leader>nf", "<cmd>lua require('neogen').generate()<cr>", desc = "Neogen generate" },
 		},
