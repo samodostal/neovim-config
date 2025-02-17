@@ -56,6 +56,9 @@ M.lsp = {
 	-- [ PHP ]
 	"intelephense",
 
+	-- [ JAVA ]
+	"jdtls",
+
 	-- [ Go ]
 	"gopls",
 
@@ -85,6 +88,7 @@ M.linters_with_ft = {
 	javascriptreact = { "eslint_d" },
 	typescriptreact = { "eslint_d" },
 	gdscript = { toolkit = "gdtoolkit", command = "gdlint" },
+	java = { "checkstyle" },
 }
 
 -- Check formatters availability at: https://github.com/stevearc/conform.nvim
@@ -94,6 +98,8 @@ M.formatters_with_ft = {
 	typescript = { "prettier" },
 	javascriptreact = { "prettier" },
 	typescriptreact = { "prettier" },
+	json = { "prettier" },
+	jsonc = { "prettier" },
 	html = { "prettier" },
 	yaml = { "prettier" },
 	cpp = { "clang_format" },
@@ -103,6 +109,7 @@ M.formatters_with_ft = {
 	cs = { "csharpier" },
 	nix = { "nixpkgs_fmt" },
 	gdscript = { toolkit = "gdtoolkit", command = "gdformat" },
+	java = { "google-java-format" },
 }
 
 return M
