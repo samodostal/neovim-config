@@ -29,6 +29,14 @@ return {
 					},
 				},
 			},
+			pickers = {
+				git_files = {
+					recurse_submodules = true,
+				},
+				find_files = {
+					hidden = true,
+				},
+			},
 		},
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
