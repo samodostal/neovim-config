@@ -46,6 +46,11 @@ return {
 				command = vim.fn.stdpath "data" .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
 				args = {},
 			}
+			dap.adapters.gdb = {
+				type = "executable",
+				command = "arm-none-eabi-gdb",
+				args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+			}
 			dap.adapters.python = {
 				id = "python",
 				type = "executable",
@@ -60,6 +65,14 @@ return {
 
 			-- Configurations
 			dap.configurations.c = {
+				{
+					name = "Debug nRF52840 - Attach to Jlink GDB Server",
+					type = "gdb",
+					request = "attach",
+					program = "/home/samodostal/Projects/corneo/development/firmware/build/firmware/zephyr/zephyr.elf",
+					cwd = "${workspaceFolder}",
+					target = "localhost:2331",
+				},
 				{
 					name = "Launch file",
 					type = "cppdbg",
