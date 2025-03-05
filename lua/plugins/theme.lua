@@ -8,8 +8,7 @@ return {
 					local colors = require("tokyonight.colors").setup()
 
 					vim.api.nvim_set_hl(0, "NonText", { fg = "#3d4563" })
-					vim.api.nvim_set_hl(0, "BlinkCmpSource", { fg = colors.hint })
-					vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { fg = colors.comment })
+					vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "none", bold = true })
 					vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#282f47" })
 					vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#3d4563" })
 					vim.api.nvim_set_hl(0, "FlashMatch", { fg = colors.yellow })

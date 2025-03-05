@@ -13,13 +13,14 @@ return {
 		lazy = false,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
+			"xzbdmw/colorful-menu.nvim",
 		},
 		opts = {
 			sources = {
 				default = {
-					"snippets",
 					"lazydev",
 					"lsp",
+					"snippets",
 					"path",
 					"buffer",
 				},
@@ -46,13 +47,33 @@ return {
 					auto_brackets = { enabled = true },
 				},
 				menu = {
+					-- draw = {
+					-- 	columns = {
+					-- 		{ "label", "label_description", gap = 1 },
+					-- 		{ "kind_icon", gap = 1 },
+					-- 		{ "source_name" },
+					-- 	},
+					-- 	components = {
+					-- 		source_name = {
+					-- 			text = function(ctx) return sources_short[ctx.source_name] or ctx.source_name end,
+					-- 		},
+					-- 	},
+					-- },
 					draw = {
+						-- We don't need label_description now because label and label_description are already
+						-- combined together in label by colorful-menu.nvim.
 						columns = {
-							{ "label", "label_description", gap = 1 },
-							{ "kind_icon", gap = 1 },
+							{ "kind_icon" },
+							{ "label", gap = 1 },
 							{ "source_name" },
 						},
 						components = {
+							label = {
+								text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
+								highlight = function(ctx)
+									return require("colorful-menu").blink_components_highlight(ctx)
+								end,
+							},
 							source_name = {
 								text = function(ctx) return sources_short[ctx.source_name] or ctx.source_name end,
 							},
@@ -67,6 +88,10 @@ return {
 			signature = {
 				enabled = true,
 			},
+			fuzzy = {
+				use_frecency = false,
+				use_proximity = false,
+			}
 		},
 	},
 }
