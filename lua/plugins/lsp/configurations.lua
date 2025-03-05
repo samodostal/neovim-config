@@ -21,7 +21,8 @@ M.lsp_configurations = {
 	},
 	clangd = {
 		cmd = {
-			"/run/current-system/sw/bin/clangd",
+			"/usr/bin/clangd",
+			"--clang-tidy",
 		},
 	},
 }
