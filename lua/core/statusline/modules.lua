@@ -119,7 +119,7 @@ M.lsp_status = function()
 		end
 	end
 
-	return ("%#StatusLSPStatus#" .. "<  " .. client_names .. " /> ")
+	return ("%#StatusLSPStatus#" .. "< " .. client_names .. " /> ")
 end
 
 M.linters_status = function()
