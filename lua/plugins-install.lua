@@ -23,5 +23,4 @@ require("lazy").setup {
 	change_detection = {
 		notify = false,
 	},
-	lockfile = os.getenv "HOME" .. "/nixos-config/home/neovim-config/lazy-lock.json",
 }
