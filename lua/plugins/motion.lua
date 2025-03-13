@@ -53,4 +53,19 @@ return {
 			{ "ga.", "<cmd>TextCaseOpenTelescope<cr>", desc = "Telescope" },
 		},
 	},
+	{
+		"bassamsdata/namu.nvim",
+		config = function()
+			require("namu").setup {
+				namu_symbols = {
+					enable = true,
+					options = {},
+				},
+			}
+			vim.keymap.set("n", "gs", ":Namu symbols<cr>", {
+				desc = "Jump to LSP symbol",
+				silent = true,
+			})
+		end,
+	},
 }

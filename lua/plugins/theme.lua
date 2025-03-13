@@ -14,6 +14,7 @@ return {
 					vim.api.nvim_set_hl(0, "FlashMatch", { fg = colors.yellow })
 					vim.api.nvim_set_hl(0, "FlashCurrent", { fg = colors.yellow })
 					vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#00FFFF" })
+					vim.api.nvim_set_hl(0, "LocalHighlight", { fg = "#dcd7ba", bg = "#193345" })
 				end,
 			})
 
@@ -22,7 +23,12 @@ return {
 	},
 	{
 		"tzachar/local-highlight.nvim",
-		opts = {},
+		opts = {
+			animate = {
+				enabled = false,
+			},
+			debounce_timeout = 0,
+		},
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
