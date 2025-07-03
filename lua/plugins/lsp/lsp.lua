@@ -41,6 +41,7 @@ return {
 			vim.diagnostic.config {
 				signs = false,
 				severity_sort = true,
+				virtual_text = true,
 				float = {
 					header = "",
 					source = true,
