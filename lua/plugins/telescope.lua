@@ -7,9 +7,9 @@ return {
 				sorting_strategy = "ascending",
 				layout_config = {
 					vertical = {
+						prompt_position = "top",
 						mirror = true,
 					},
-					prompt_position = "top",
 				},
 				file_ignore_patterns = {
 					"dist/.*",
@@ -35,6 +35,20 @@ return {
 				},
 				find_files = {
 					hidden = true,
+					-- theme = "cursor",
+					find_command = {
+						"rg",
+						"--files",
+						"--hidden",
+						"--glob=!**/.git/*",
+						"--glob=!**/.idea/*",
+						"--glob=!**/.vscode/*",
+						"--glob=!**/build/*",
+						"--glob=!**/dist/*",
+						"--glob=!**/node_modules/*",
+						"--glob=!**/yarn.lock",
+						"--glob=!**/package-lock.json",
+					},
 				},
 			},
 		},
