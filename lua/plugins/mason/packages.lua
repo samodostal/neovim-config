@@ -110,6 +110,7 @@ M.formatters_with_ft = {
 	nix = { "nixpkgs_fmt" },
 	gdscript = { toolkit = "gdtoolkit", command = "gdformat" },
 	java = { "google-java-format" },
+	xml = { "xmlformatter" },
 }
 
 return M
