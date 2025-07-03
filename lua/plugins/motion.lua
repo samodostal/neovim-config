@@ -1,6 +1,9 @@
 return {
 	{
 		"folke/flash.nvim",
+		options = {
+			labels = "aoeuidhtnspyqjklxwbcvrzfmg",
+		},
 		keys = {
 			{
 				"s",
