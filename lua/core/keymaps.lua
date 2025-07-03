@@ -28,6 +28,8 @@ map("n", "gb", "'A")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+map("n", "ycc", "yygccp", { noremap = false })
+
 map("t", "<c-t>", "<c-\\><c-n>")
 
 map_menu("Neovim management", "<leader>nn", {
