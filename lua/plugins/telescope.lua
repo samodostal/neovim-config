@@ -5,6 +5,7 @@ return {
 		opts = {
 			defaults = {
 				sorting_strategy = "ascending",
+				layout_strategy = "vertical",
 				layout_config = {
 					vertical = {
 						prompt_position = "top",
