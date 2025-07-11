@@ -1,4 +1,12 @@
-local is_hidden_predicate = function(name, _) return name:match "%.uid$" or name:match "%.gdshader$" end
+local function is_hidden_predicate(name, _)
+	local hidden_patterns = { "%.uid$", "%.gdshader$", "%.import$" }
+	for _, pattern in ipairs(hidden_patterns) do
+		if name:match(pattern) then
+			return true
+		end
+	end
+	return false
+end
 
 return {
 	{
