@@ -1,3 +1,5 @@
+local is_hidden_predicate = function(name, _) return name:match "%.uid$" or name:match "%.gdshader$" end
+
 return {
 	{
 		"stevearc/oil.nvim",
@@ -5,7 +7,10 @@ return {
 		config = function()
 			require("oil").setup {
 				default_file_explorer = true,
-				view_options = { show_hidden = true },
+				view_options = {
+					show_hidden = true,
+					is_hidden_file = is_hidden_predicate,
+				},
 				use_default_keymaps = false,
 				keymaps = {
 					["g?"] = { "actions.show_help", mode = "n" },
