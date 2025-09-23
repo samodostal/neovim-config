@@ -27,8 +27,8 @@ opt.laststatus = 3
 
 opt.termguicolors = true
 
-opt.scrolloff = 2
-opt.sidescrolloff = 2
+opt.scrolloff = 4
+opt.sidescrolloff = 4
 opt.splitkeep = "screen"
 
 opt.splitbelow = true
