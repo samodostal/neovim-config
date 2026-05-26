@@ -71,4 +71,8 @@ return {
 			})
 		end,
 	},
+	{
+		"sQVe/sort.nvim",
+		opts = {},
+	},
 }
