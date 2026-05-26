@@ -11,7 +11,6 @@ return {
 			modules.LSP_Diagnostics(),
 			"%=",
 
-			modules.copilot_status(),
 			modules.lsp_status(),
 			modules.linters_status(),
 			modules.formatters_status(),

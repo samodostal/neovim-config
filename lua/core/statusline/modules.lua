@@ -13,12 +13,12 @@ local modes = {
 	["nt"] = { "NTERMINAL", "StatusVimTerm" },
 	["v"] = { "VISUAL", "StatusVimVisual" },
 	["V"] = { "V-LINE", "StatusVimVisual" },
-	[""] = { "V-BLOCK", "StatusVimVisual" },
+	[""] = { "V-BLOCK", "StatusVimVisual" },
 	["R"] = { "REPLACE", "StatusVimReplace" },
 	["Rv"] = { "V-REPLACE", "StatusVimReplace" },
 	["s"] = { "SELECT", "StatusVimSelect" },
 	["S"] = { "S-LINE", "StatusVimSelect" },
-	[""] = { "S-BLOCK", "StatusVimSelect" },
+	[""] = { "S-BLOCK", "StatusVimSelect" },
 	["c"] = { "COMMAND", "StatusVimCmd" },
 	["cv"] = { "COMMAND", "StatusVimCmd" },
 	["ce"] = { "COMMAND", "StatusVimCmd" },
@@ -32,7 +32,7 @@ local M = {}
 
 M.mode = function()
 	local m = vim.api.nvim_get_mode().mode
-	local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1] .. " "
+	local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1] .. " "
 	return current_mode .. "%#ST_EmptySpace#"
 end
 
@@ -62,9 +62,9 @@ M.git = function()
 
 	local git_status = vim.b.gitsigns_status_dict
 
-	local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
-	local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
-	local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
+	local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
+	local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
+	local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
 	local branch_name = " 󰊢 " .. git_status.head .. " "
 
 	return "%#StatusGitInfo#" .. branch_name .. added .. changed .. removed
@@ -80,46 +80,30 @@ M.LSP_Diagnostics = function()
 	local hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
 	local info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 
-	local s_errors = (errors and errors > 0) and ("%#StatusLSPError#" .. " " .. errors .. " ") or ""
-	local s_warnings = (warnings and warnings > 0) and ("%#StatusLSPWarn#" .. "  " .. warnings .. " ") or ""
+	local s_errors = (errors and errors > 0) and ("%#StatusLSPError#" .. " " .. errors .. " ") or ""
+	local s_warnings = (warnings and warnings > 0) and ("%#StatusLSPWarn#" .. "  " .. warnings .. " ") or ""
 	local s_hints = (hints and hints > 0) and ("%#StatusLSPHint#" .. "󰛩 " .. hints .. " ") or ""
 	local s_info = (info and info > 0) and ("%#StatusLSPInfo#" .. "󰋼 " .. info .. " ") or ""
 
 	return s_errors .. s_warnings .. s_hints .. s_info
 end
 
-M.copilot_status = function()
-	local is_copilot_attached = false
-
-	for _, client in ipairs(vim.lsp.get_clients()) do
-		if client.attached_buffers[vim.api.nvim_get_current_buf()] then
-			if client.name == "copilot" then
-				is_copilot_attached = true
-				break
-			end
-		end
-	end
-	return ("%#StatusLSPStatus#" .. "< " .. (is_copilot_attached and "" or "") .. " /> ")
-end
-
 M.lsp_status = function()
-	local client_names = ""
+	local client_names = ""
 
 	if rawget(vim, "lsp") then
 		for _, client in ipairs(vim.lsp.get_clients()) do
 			if client.attached_buffers[vim.api.nvim_get_current_buf()] then
-				if client.name ~= "copilot" then
-					if client_names == "" then
-						client_names = client.name
-					else
-						client_names = client_names .. ", " .. client.name
-					end
+				if client_names == "" then
+					client_names = client.name
+				else
+					client_names = client_names .. ", " .. client.name
 				end
 			end
 		end
 	end
 
-	return ("%#StatusLSPStatus#" .. "< " .. client_names .. " /> ")
+	return ("%#StatusLSPStatus#" .. "<󰒋 " .. client_names .. " /> ")
 end
 
 M.linters_status = function()
@@ -128,10 +112,10 @@ M.linters_status = function()
 		return
 	end
 
-	local client_names = ""
+	local client_names = ""
 
 	for _, client in ipairs(nvim_lint._resolve_linter_by_ft(vim.bo.filetype)) do
-		if client_names == "" then
+		if client_names == "" then
 			client_names = client
 		else
 			client_names = client_names .. ", " .. client
@@ -147,10 +131,10 @@ M.formatters_status = function()
 		return
 	end
 
-	local client_names = ""
+	local client_names = ""
 
 	for _, client in ipairs(conform.list_formatters_for_buffer(0)) do
-		if client_names == "" then
+		if client_names == "" then
 			client_names = client
 		else
 			client_names = client_names .. ", " .. client
@@ -167,7 +151,7 @@ M.cwd = function()
 end
 
 M.cursor_position = function()
-	local left_sep = "%#StatusCursor#" .. " "
+	local left_sep = "%#StatusCursor#" .. " "
 
 	local position = vim.fn.getpos "."
 	local current_line = position[2]
