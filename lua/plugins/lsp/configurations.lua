@@ -1,6 +1,6 @@
 local M = {}
 
--- ':h lspconfig-setup'
+-- ':h lsp-config'
 M.lsp_configurations = {
 	lua_ls = {
 		settings = {

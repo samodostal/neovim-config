@@ -1,8 +1,3 @@
-local on_attach = function(client)
-	client.server_capabilities.documentFormattingProvider = false
-	client.server_capabilities.semanticTokensProvider = nil
-end
-
 return {
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -11,32 +6,24 @@ return {
 			"saghen/blink.cmp",
 		},
 		config = function()
-			local mason_lspconfig = require "mason-lspconfig"
-			local lspconfig = require "lspconfig"
-
 			local packages = require "plugins.mason.packages"
 			local lsp_configurations = require("plugins.lsp.configurations").lsp_configurations
-			local map = require("core.utils").map
 
-			mason_lspconfig.setup()
-			mason_lspconfig.setup_handlers {
-				function(server)
-					if not vim.tbl_contains(packages.managed_separately, server) then
-						local config = lsp_configurations[server] or {}
-						config.on_attach = on_attach
-						config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-
-						lspconfig[server].setup(config)
-					end
-				end,
-			}
-
-			-- Godot is weird
-			local config = {
-				on_attach = on_attach,
+			vim.lsp.config("*", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+
+			for server, config in pairs(lsp_configurations) do
+				vim.lsp.config(server, config)
+			end
+
+			require("mason-lspconfig").setup {
+				automatic_enable = {
+					exclude = packages.managed_separately,
+				},
 			}
-			lspconfig.gdscript.setup(config)
+
+			vim.lsp.enable "gdscript"
 
 			vim.diagnostic.config {
 				signs = false,
@@ -48,15 +35,36 @@ return {
 				},
 			}
 
-			map("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
-			map("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
-			map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-			map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-			map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-			map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-			map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
-			map("n", "<leader>pd", "<cmd>lua vim.diagnostic.open_float()<cr>")
-			map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+					if client then
+						client.server_capabilities.documentFormattingProvider = false
+						client.server_capabilities.semanticTokensProvider = nil
+					end
+
+					if vim.b[args.buf].lsp_keymaps_set then
+						return
+					end
+					vim.b[args.buf].lsp_keymaps_set = true
+
+					local buf = args.buf
+					local k = function(lhs, rhs)
+						vim.keymap.set("n", lhs, rhs, { buffer = buf, silent = true, noremap = true })
+					end
+
+					k("gd", function() require("telescope.builtin").lsp_definitions() end)
+					k("gr", function() require("telescope.builtin").lsp_references() end)
+					k("gD", vim.lsp.buf.declaration)
+					k("gi", vim.lsp.buf.implementation)
+					k("gy", vim.lsp.buf.type_definition)
+					k("<leader>ca", vim.lsp.buf.code_action)
+					k("<leader>rn", vim.lsp.buf.rename)
+					k("<leader>pd", vim.diagnostic.open_float)
+					k("K", vim.lsp.buf.hover)
+				end,
+			})
 		end,
 	},
 	{ "j-hui/fidget.nvim", opts = {} },
