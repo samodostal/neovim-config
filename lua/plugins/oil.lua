@@ -13,11 +13,21 @@ return {
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
+			custom_oil_winbar = function()
+				local path = vim.fn.expand "%"
+				path = path:gsub("oil://", "")
+
+				return "  " .. vim.fn.fnamemodify(path, ":.")
+			end
+
 			require("oil").setup {
 				default_file_explorer = true,
 				view_options = {
 					show_hidden = true,
 					is_hidden_file = is_hidden_predicate,
+				},
+				win_options = {
+					winbar = "%{v:lua.custom_oil_winbar()}",
 				},
 				use_default_keymaps = false,
 				keymaps = {
