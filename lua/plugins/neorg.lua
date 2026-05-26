@@ -20,6 +20,11 @@ return {
 					-- 	},
 					-- },
 					["core.dirman"] = {},
+					["core.integrations.treesitter"] = {
+						config = {
+							warn_missing_parsers = false,
+						},
+					},
 				},
 			}
 
