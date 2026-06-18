@@ -15,6 +15,7 @@ return {
 					vim.api.nvim_set_hl(0, "FlashCurrent", { fg = colors.yellow })
 					vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#00FFFF" })
 					vim.api.nvim_set_hl(0, "LocalHighlight", { fg = "#dcd7ba", bg = "#193345" })
+					vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#dcd7ba" })
 				end,
 			})
 
