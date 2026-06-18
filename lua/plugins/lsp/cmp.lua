@@ -6,30 +6,6 @@ local sources_short = {
 	lazydev = "[LAZY]",
 }
 
-local function kind_comparator(a, b)
-	local kind = vim.lsp.protocol.CompletionItemKind
-	local a_fn = a.kind == kind.Function or a.kind == kind.Method
-	local b_fn = b.kind == kind.Function or b.kind == kind.Method
-	if a_fn and not b_fn then
-		return true
-	end
-	if not a_fn and b_fn then
-		return false
-	end
-end
-
-local function gdscript_user_first(a, b)
-	if vim.bo.filetype ~= "gdscript" then
-		return
-	end
-	if a._user_defined and not b._user_defined then
-		return true
-	end
-	if not a._user_defined and b._user_defined then
-		return false
-	end
-end
-
 return {
 	{
 		"Saghen/blink.cmp",
@@ -49,23 +25,6 @@ return {
 					lsp = {
 						name = "LSP",
 						score_offset = 100,
-
-						transform_items = function(_, items)
-							if vim.bo.filetype ~= "gdscript" then
-								return items
-							end
-
-							for _, item in ipairs(items) do
-								local detail = item.detail or ""
-								local desc = (item.labelDetails and item.labelDetails.description) or ""
-								if detail:find("res://", 1, true) or desc:find("res://", 1, true) then
-									item._user_defined = true
-									item.score_offset = (item.score_offset or 0) + 100
-								end
-							end
-
-							return items
-						end,
 					},
 
 					snippets = {
@@ -173,9 +132,7 @@ return {
 
 				sorts = {
 					"exact",
-					gdscript_user_first,
 					"score",
-					kind_comparator,
 					"label",
 				},
 			},
