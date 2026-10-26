@@ -38,7 +38,7 @@ M.lsp = {
 	-- 'deno'
 
 	-- [ Game dev ]
-	"gdtoolkit",
+	-- "gdscript-formatter",
 
 	-- [ Docker ]
 	"docker-compose-language-service",
@@ -81,13 +81,14 @@ M.dap = {
 
 -- Check linters availability at: https://github.com/mfussenegger/nvim-lint
 M.linters_with_ft = {
-	cpp = { "cpplint" },
+	-- c = { "clang-tidy" },
+	-- cpp = { "clang-tidy" },
 	lua = { "luacheck" },
 	javascript = { "eslint_d" },
 	typescript = { "eslint_d" },
 	javascriptreact = { "eslint_d" },
 	typescriptreact = { "eslint_d" },
-	gdscript = { toolkit = "gdtoolkit", command = "gdlint" },
+	-- gdscript = { toolkit = "gdtoolkit", command = "gdlint" },
 	java = { "checkstyle" },
 }
 
@@ -102,13 +103,15 @@ M.formatters_with_ft = {
 	jsonc = { "prettier" },
 	html = { "prettier" },
 	yaml = { "prettier" },
-	cpp = { "clang_format" },
 	c = { "clang_format" },
+	cpp = { "clang_format" },
 	python = { "black" },
 	haskell = { "ormolu" },
 	cs = { "csharpier" },
 	nix = { "nixpkgs_fmt" },
-	gdscript = { toolkit = "gdtoolkit", command = "gdformat" },
+	-- gdscript = { toolkit = "gdtoolkit", command = "gdformat" },
+	gdscript = { "gdscript-formatter" },
+	gdshader = { "clang_format" },
 	java = { "google-java-format" },
 	xml = { "xmlformatter" },
 }

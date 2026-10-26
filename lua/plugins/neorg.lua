@@ -14,11 +14,6 @@ return {
 							external_filetypes = { "pdf" },
 						},
 					},
-					-- ["core.completion"] = {
-					-- 	config = {
-					-- engine = "nvim-cmp",
-					-- 	},
-					-- },
 					["core.dirman"] = {},
 					["core.integrations.treesitter"] = {
 						config = {

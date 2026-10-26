@@ -41,3 +41,28 @@ map_menu("Neovim management", "<leader>nn", {
 
 map("n", "<leader>cc", "<cmd>lua require('core.compiler').compile_and_run(1)<cr>")
 map("n", "<leader>cf", "<cmd>lua require('core.compiler').compile_and_run(2)<cr>")
+
+map("n", "gn", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+map("n", "gN", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+
+vim.keymap.set("n", "<leader>uu", function()
+	if vim.fn.exists ":Undotree" == 0 then
+		vim.cmd.packadd "nvim.undotree"
+	end
+	vim.cmd.Undotree()
+end, { desc = "Undo tree" })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "nvim-undotree",
+	callback = function(args)
+		local function close() vim.cmd.Undotree() end
+		vim.keymap.set("n", "q", close, { buffer = args.buf, silent = true, desc = "Close undo tree" })
+		vim.keymap.set("n", "<Esc>", close, { buffer = args.buf, silent = true })
+		vim.keymap.set("n", "<CR>", close, { buffer = args.buf, silent = true })
+		vim.keymap.set("n", "g?", "<cmd>help package-undotree<cr>", {
+			buffer = args.buf,
+			silent = true,
+			desc = "Undo tree help",
+		})
+	end,
+})

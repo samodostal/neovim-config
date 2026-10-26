@@ -1,3 +1,53 @@
+local ignored_dirs = {
+	"__pycache__",
+	".cache",
+	".direnv",
+	".git",
+	".godot",
+	".hg",
+	".history",
+	".idea",
+	".next",
+	".nuxt",
+	".svn",
+	".turbo",
+	".venv",
+	".vscode",
+	"addons",
+	"build",
+	"coverage",
+	"dist",
+	"node_modules",
+	"out",
+	"target",
+	"vendor",
+}
+
+local ignored_files = {
+	"*.gd.uid",
+	"*.import",
+	"*.tscn",
+	"flake.lock",
+	"package-lock.json",
+	"yarn.lock",
+}
+
+local file_ignore_patterns = {}
+local ignore_globs = {}
+
+for _, dir in ipairs(ignored_dirs) do
+	local escaped = vim.pesc(dir)
+	table.insert(file_ignore_patterns, "^" .. escaped .. "/")
+	table.insert(file_ignore_patterns, "/" .. escaped .. "/")
+	table.insert(ignore_globs, "--glob=!**/" .. dir .. "/**")
+end
+
+for _, file in ipairs(ignored_files) do
+	local suffix = vim.pesc(file:gsub("^%*", ""))
+	table.insert(file_ignore_patterns, suffix .. "$")
+	table.insert(ignore_globs, "--glob=!**/" .. file)
+end
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -12,17 +62,7 @@ return {
 						mirror = true,
 					},
 				},
-				file_ignore_patterns = {
-					"dist/.*",
-					"node_modules/.*",
-					"addons/.*",
-					"%.git/.*",
-					"%.vim/.*",
-					"%.idea/.*",
-					"%.vscode/.*",
-					"%.history/.*",
-					"flake.lock",
-				},
+				file_ignore_patterns = file_ignore_patterns,
 				mappings = {
 					i = {
 						["<C-a>"] = require("telescope.actions").select_all,
@@ -36,23 +76,8 @@ return {
 					recurse_submodules = true,
 				},
 				find_files = {
-					hidden = true,
-					-- theme = "cursor",
-					find_command = {
-						"rg",
-						"--files",
-						"--hidden",
-						"--glob=!**/.git/*",
-						"--glob=!**/.idea/*",
-						"--glob=!**/.vscode/*",
-						"--glob=!**/build/*",
-						"--glob=!**/dist/*",
-						"--glob=!**/addons/*",
-						"--glob=!**/node_modules/*",
-						"--glob=!**/yarn.lock",
-						"--glob=!**/package-lock.json",
-						"--glob=!*.gd.uid",
-					},
+					file_ignore_patterns = {},
+					find_command = function() return vim.list_extend({ "rg", "--files" }, ignore_globs) end,
 				},
 			},
 		},
@@ -73,9 +98,5 @@ return {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "make",
 		config = function() require("telescope").load_extension "fzf" end,
-	},
-	{
-		"stevearc/dressing.nvim",
-		opts = {},
 	},
 }

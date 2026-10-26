@@ -51,6 +51,20 @@ return {
 				command = "arm-none-eabi-gdb",
 				args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 			}
+
+			dap.adapters.gdb_native = function(callback, config)
+				local args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+				if config.program then
+					table.insert(args, "--eval-command")
+					table.insert(args, "file " .. config.program)
+				end
+				callback {
+					type = "executable",
+					command = "gdb",
+					args = args,
+				}
+			end
+
 			dap.adapters.python = {
 				id = "python",
 				type = "executable",
@@ -95,6 +109,26 @@ return {
 					miDebuggerPath = "/run/current-system/sw/bin/gdb",
 				},
 			}
+
+			dap.configurations.cpp = {
+				{
+					name = "Attach to running Godot",
+					type = "gdb_native",
+					request = "attach",
+					program = "${workspaceFolder}/bin/godot.linuxbsd.editor.dev.x86_64",
+					pid = function() return require("dap.utils").pick_process { filter = "godot" } end,
+					cwd = "${workspaceFolder}",
+				},
+				{
+					name = "Launch Godot Engine",
+					type = "gdb_native",
+					request = "launch",
+					program = "${workspaceFolder}/bin/godot.linuxbsd.editor.dev.x86_64",
+					args = { "--editor", "--path", "/your/real/project/path" },
+					cwd = "${workspaceFolder}",
+				},
+			}
+
 			dap.configurations.python = {
 				{
 					name = "Launch file",

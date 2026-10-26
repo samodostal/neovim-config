@@ -1,5 +1,6 @@
 return {
 	-- Lazygit added via snacks.nvim (snacks.lua)
+	-- Oil git extension (oil.lua)
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {

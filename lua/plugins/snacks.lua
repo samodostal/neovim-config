@@ -13,6 +13,7 @@ return {
 					enabled = false,
 				},
 			},
+			scope = {},
 		},
 		keys = {
 			-- Git
@@ -21,6 +22,9 @@ return {
 			{ "<leader>go", function() Snacks.gitbrowse() end, desc = "Git Browse" },
 			{ "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 			{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
+
+			-- Registers
+			{ "<leader>y", function() Snacks.picker.registers() end, desc = "Registers" },
 
 			-- Notifier
 			{ "<leader>ns", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },

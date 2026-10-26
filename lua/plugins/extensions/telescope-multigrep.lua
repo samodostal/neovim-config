@@ -8,9 +8,19 @@ local pickers = require "telescope.pickers"
 
 return function(opts)
 	opts = opts or {}
-	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
+	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.uv.cwd()
 	opts.shortcuts = opts.shortcuts or {}
 	opts.pattern = opts.pattern or "%s"
+
+	local file_entry_maker = make_entry.gen_from_file(opts)
+	local vimgrep_entry_maker = make_entry.gen_from_vimgrep(opts)
+
+	local function entry_maker(line)
+		if line:match ":%d+:%d+:" then
+			return vimgrep_entry_maker(line)
+		end
+		return file_entry_maker(line)
+	end
 
 	local custom_grep = finders.new_async_job {
 		command_generator = function(prompt)
@@ -18,34 +28,43 @@ return function(opts)
 				return nil
 			end
 
-			local prompt_split = vim.split(prompt, "  ")
+			local sep = prompt:find("  ", 1, true)
+			local search = sep and prompt:sub(1, sep - 1) or prompt
+			local glob = sep and vim.trim(prompt:sub(sep + 2)) or ""
 
-			local args = { "rg" }
-			if prompt_split[1] then
-				table.insert(args, "-e")
-				table.insert(args, prompt_split[1])
+			if glob == "" and vim.trim(search) == "" then
+				return nil
 			end
-			pcall(require("telescope").load_extension, "fzf")
 
-			if prompt_split[2] then
+			local file_mode = search == ""
+			local args = { "rg" }
+
+			if file_mode then
+				table.insert(args, "--files")
+			else
+				table.insert(args, "-e")
+				table.insert(args, search)
+			end
+
+			if glob ~= "" then
 				table.insert(args, "-g")
-
-				local pattern
-				if opts.shortcuts[prompt_split[2]] then
-					pattern = opts.shortcuts[prompt_split[2]]
-				else
-					pattern = prompt_split[2]
-				end
-
+				local pattern = opts.shortcuts[glob] or glob
 				table.insert(args, string.format(opts.pattern, pattern))
 			end
 
-			return vim.tbl_flatten {
-				args,
-				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-			}
+			local extra = file_mode and { "--color=never" }
+				or {
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+				}
+
+			return vim.list_extend(args, extra)
 		end,
-		entry_maker = make_entry.gen_from_vimgrep(opts),
+		entry_maker = entry_maker,
 		cwd = opts.cwd,
 	}
 

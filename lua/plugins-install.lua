@@ -14,8 +14,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Simple plugins are in `plugins/*.lua`
--- Plugins with complex configurations are in `plugins/**/init.lua`
 require("lazy").setup {
 	spec = {
 		{ import = "plugins" },

@@ -23,7 +23,7 @@ return {
 			require("oil").setup {
 				default_file_explorer = true,
 				view_options = {
-					show_hidden = true,
+					show_hidden = false,
 					is_hidden_file = is_hidden_predicate,
 				},
 				win_options = {
@@ -33,6 +33,8 @@ return {
 				keymaps = {
 					["g?"] = { "actions.show_help", mode = "n" },
 					["<CR>"] = "actions.select",
+					["<C-v>"] = { "actions.select", opts = { vertical = true } },
+					["<C-s>"] = { "actions.select", opts = { horizontal = true } },
 					["<C-p>"] = "actions.preview",
 					["<C-c>"] = "actions.refresh",
 					["-"] = { "actions.parent", mode = "n" },
@@ -48,5 +50,16 @@ return {
 
 			map("n", "-", "<cmd>Oil<cr>")
 		end,
+	},
+
+	{
+		"malewicz1337/oil-git.nvim",
+		dependencies = {
+			"stevearc/oil.nvim",
+		},
+		opts = {
+			show_file_highlights = false,
+			show_directory_highlights = false,
+		},
 	},
 }
