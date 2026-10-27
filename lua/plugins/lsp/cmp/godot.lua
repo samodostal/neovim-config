@@ -404,12 +404,63 @@ function M.prepare_items(context, items)
 	return prepare_godot_items(context, items)
 end
 
+local match_highlight_groups = {}
+
+local function darken_color(color, factor)
+	local red = math.floor(color / 65536) % 256
+	local green = math.floor(color / 256) % 256
+	local blue = color % 256
+
+	return string.format(
+		"#%02x%02x%02x",
+		math.floor(red * factor),
+		math.floor(green * factor),
+		math.floor(blue * factor)
+	)
+end
+
+local function highlight_foreground(group)
+	if type(group) ~= "string" then return nil end
+	return vim.api.nvim_get_hl(0, { name = group, link = false }).fg
+end
+
+local function darkened_match_group(highlights, index)
+	local base_group = nil
+
+	for _, highlight in ipairs(highlights) do
+		local is_match = highlight.group == "BlinkCmpLabelMatch"
+		if not is_match and highlight[1] <= index and index < highlight[2] then base_group = highlight.group end
+	end
+
+	local foreground = highlight_foreground(base_group) or highlight_foreground("Normal")
+	if not foreground then return "BlinkCmpLabelMatch" end
+
+	if match_highlight_groups[foreground] then return match_highlight_groups[foreground] end
+
+	local name = "GodotCmpLabelMatch" .. foreground
+	vim.api.nvim_set_hl(0, name, { fg = darken_color(foreground, 0.7) })
+	match_highlight_groups[foreground] = name
+
+	return name
+end
+
 function M.label_highlight(ctx)
 	local highlights = require("colorful-menu").blink_components_highlight(ctx)
+
+	local matches = {}
+	for _, highlight in ipairs(highlights) do
+		if highlight.group == "BlinkCmpLabelMatch" then table.insert(matches, highlight) end
+	end
+
+	for _, highlight in ipairs(matches) do
+		highlight.group = darkened_match_group(highlights, highlight[1])
+	end
+
 	if godot_own_items[ctx.item] then
 		local text = require("colorful-menu").blink_components_text(ctx)
 		table.insert(highlights, { 0, #text, group = "BlinkCmpLabelOwn", priority = 20000 })
 	end
+
 	return highlights
 end
 

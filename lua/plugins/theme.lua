@@ -17,7 +17,7 @@ return {
 					local colors = require("tokyonight.colors").setup()
 
 					vim.api.nvim_set_hl(0, "NonText", { fg = "#3d4563" })
-					vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "none", bold = true })
+					vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = colors.blue })
 					vim.api.nvim_set_hl(0, "BlinkCmpLabelOwn", { bold = true })
 					vim.api.nvim_set_hl(0, "BlinkCmpSource", { link = "Comment" })
 					vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { link = "Comment" })
