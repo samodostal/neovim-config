@@ -18,6 +18,9 @@ return {
 
 					vim.api.nvim_set_hl(0, "NonText", { fg = "#3d4563" })
 					vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "none", bold = true })
+					vim.api.nvim_set_hl(0, "BlinkCmpLabelOwn", { bold = true })
+					vim.api.nvim_set_hl(0, "BlinkCmpSource", { link = "Comment" })
+					vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { link = "Comment" })
 					vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#282f47" })
 					vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#3d4563" })
 					vim.api.nvim_set_hl(0, "FlashMatch", { fg = colors.yellow })

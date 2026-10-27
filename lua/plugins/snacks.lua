@@ -1,3 +1,5 @@
+local lazygit = require "plugins.snacks.lazygit"
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -7,6 +9,19 @@ return {
 			bigfile = { enabled = true },
 			notifier = { enabled = true },
 			input = { enabled = true },
+			lazygit = {
+				win = {
+					keys = {
+						term_normal = false,
+						hide = {
+							"<Esc>",
+							function(self) lazygit.hide(self) end,
+							mode = { "n", "t" },
+							desc = "Hide lazygit",
+						},
+					},
+				},
+			},
 			indent = {
 				enabled = true,
 				animate = {
@@ -16,22 +31,15 @@ return {
 			scope = {},
 		},
 		keys = {
-			-- Git
 			{ "<leader>gs", function() Snacks.lazygit() end, desc = "Lazygit" },
 			{ "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
 			{ "<leader>go", function() Snacks.gitbrowse() end, desc = "Git Browse" },
 			{ "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 			{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-
-			-- Registers
 			{ "<leader>y", function() Snacks.picker.registers() end, desc = "Registers" },
-
-			-- Notifier
 			{ "<leader>ns", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },
 			{ "<leader>nh", function() Snacks.notifier.hide() end, desc = "Hide notifications" },
-
 			{ "<leader>rf", function() Snacks.rename.rename_file() end, desc = "LSP Rename file" },
-
 			{
 				"<leader>N",
 				desc = "Neovim News",

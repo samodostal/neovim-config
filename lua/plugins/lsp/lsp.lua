@@ -25,6 +25,18 @@ return {
 
 			vim.lsp.enable "gdscript"
 
+			vim.api.nvim_create_autocmd({ "BufEnter", "InsertEnter" }, {
+				callback = function(args)
+					if vim.bo[args.buf].filetype ~= "gdscript" then
+						return
+					end
+					if next(vim.lsp.get_clients { bufnr = args.buf }) ~= nil then
+						return
+					end
+					vim.schedule(function() vim.lsp.enable "gdscript" end)
+				end,
+			})
+
 			vim.diagnostic.config {
 				signs = false,
 				severity_sort = true,
@@ -55,7 +67,8 @@ return {
 					end
 
 					k("gd", function() require("telescope.builtin").lsp_definitions() end)
-					k("gr", function() require("telescope.builtin").lsp_references() end)
+					k("gr", function() Snacks.picker.lsp_references() end)
+					k("gR", function() Snacks.picker.grep_word() end)
 					k("gD", vim.lsp.buf.declaration)
 					k("gi", vim.lsp.buf.implementation)
 					k("gy", vim.lsp.buf.type_definition)

@@ -2,15 +2,19 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			"rcarriga/nvim-dap-ui",
-			"nvim-neotest/nvim-nio",
+			"igorlfs/nvim-dap-view",
 		},
 		config = function()
 			local dap = require "dap"
-			local dap_ui = require "dapui"
 			local map = require("core.utils").map
 
-			dap_ui.setup()
+			require("dap-view").setup {
+				auto_toggle = true,
+				virtual_text = {
+					enabled = true,
+					position = "inline",
+				},
+			}
 
 			-- Highlights
 			vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "GitSignsDelete", linehl = "", numhl = "" })
@@ -26,11 +30,11 @@ return {
 			)
 
 			-- Keymaps
-			map("n", "<leader>ds", "<cmd>lua require('dapui').open()<cr>")
+			map("n", "<leader>ds", "<cmd>DapViewToggle<cr>")
 			map(
 				"n",
 				"<leader>de",
-				"<cmd>lua require('dapui').close()<cr><cmd>lua require('dap').clear_breakpoints()<cr>"
+				"<cmd>DapViewClose!<cr><cmd>lua require('dap').clear_breakpoints()<cr>"
 			)
 			map("n", "<leader>dd", ":lua require('dap').continue()<cr>")
 			map("n", "<leader>db", ":lua require('dap').toggle_breakpoint()<cr>")
