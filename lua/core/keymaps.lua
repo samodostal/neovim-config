@@ -15,11 +15,11 @@ map("n", "<leader>t", ":b#<cr>")
 map(
 	"n",
 	"gch",
-	"<cmd>lua if vim.g.comment_color == '#989db5' then "
-		.. "vim.cmd('highlight Comment guifg=#565f89') "
-		.. "vim.g.comment_color = '#565f89' else "
-		.. "vim.cmd('highlight Comment guifg=#989db5') "
-		.. "vim.g.comment_color = '#989db5' end<cr>"
+	"<cmd>lua if vim.g.comment_color == '#928374' then "
+		.. "vim.cmd('highlight Comment guifg=#665c54') "
+		.. "vim.g.comment_color = '#665c54' else "
+		.. "vim.cmd('highlight Comment guifg=#928374') "
+		.. "vim.g.comment_color = '#928374' end<cr>"
 )
 
 map("n", "gm", "mA")

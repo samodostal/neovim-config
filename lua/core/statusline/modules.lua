@@ -62,12 +62,15 @@ M.git = function()
 
 	local git_status = vim.b.gitsigns_status_dict
 
-	local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
-	local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
-	local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
-	local branch_name = " 󰊢 " .. git_status.head .. " "
+	local added = (git_status.added and git_status.added ~= 0) and (" 󰐕 " .. git_status.added) or ""
+	local changed = (git_status.changed and git_status.changed ~= 0) and (" 󰏫 " .. git_status.changed) or ""
+	local removed = (git_status.removed and git_status.removed ~= 0) and (" 󰍴 " .. git_status.removed) or ""
 
-	return "%#StatusGitInfo#" .. branch_name .. added .. changed .. removed
+	if added == "" and changed == "" and removed == "" then
+		return ""
+	end
+
+	return "%#StatusGitInfo#" .. added .. changed .. removed
 end
 
 M.LSP_Diagnostics = function()
@@ -157,7 +160,7 @@ M.cursor_position = function()
 	local current_line = position[2]
 	local current_col = string.format("%-2s", position[3])
 
-	return left_sep .. "%#StatusCursor# " .. current_line .. ":" .. current_col
+	return left_sep .. "%#StatusCursor# " .. current_line .. ":" .. current_col .. " "
 end
 
 return M

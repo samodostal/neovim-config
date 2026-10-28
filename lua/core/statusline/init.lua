@@ -4,7 +4,6 @@ return {
 
 		return table.concat {
 			modules.mode(),
-			modules.fileInfo(),
 			modules.git(),
 
 			"%=",

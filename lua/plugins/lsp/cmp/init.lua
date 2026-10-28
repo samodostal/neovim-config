@@ -22,7 +22,7 @@ local documentation = {
 	auto_show_delay_ms = 150,
 	update_delay_ms = 50,
 	window = {
-		border = "none",
+		border = "rounded",
 	},
 }
 
@@ -102,7 +102,7 @@ return {
 				menu = {
 					auto_show = true,
 					auto_show_delay_ms = 50,
-					border = "none",
+					border = "rounded",
 
 					draw = {
 						snippet_indicator = "~",
@@ -134,7 +134,7 @@ return {
 			signature = {
 				enabled = true,
 				window = {
-					border = "none",
+					border = "rounded",
 				},
 			},
 			appearance = {

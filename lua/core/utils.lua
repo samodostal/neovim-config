@@ -114,6 +114,24 @@ function M.packages_by_ft_with_toolkits(packages_by_ft)
 	return output
 end
 
+--- Returns true when the current working directory is inside the stow-style dotfiles repo.
+--- Configs there live under hidden `.config` directories, so pickers need `--hidden`.
+--- @return boolean
+function M.in_dotfiles()
+	local root = vim.fs.normalize(vim.fn.expand "~/.dotfiles")
+	local cwd = vim.fs.normalize(vim.uv.cwd())
+	return cwd == root or cwd:sub(1, #root + 1) == root .. "/"
+end
+
+--- Extra ripgrep args for searching the dotfiles repo. Empty outside it.
+--- @return table
+function M.dotfiles_rg_args()
+	if not M.in_dotfiles() then
+		return {}
+	end
+	return { "--hidden", "--glob=!**/.git/**" }
+end
+
 function M.packages_by_ft_with_commands(packages_by_ft)
 	local output = {}
 

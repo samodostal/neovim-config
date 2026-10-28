@@ -5,6 +5,7 @@ local conf = require("telescope.config").values
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
 local pickers = require "telescope.pickers"
+local utils = require "core.utils"
 
 return function(opts)
 	opts = opts or {}
@@ -38,6 +39,7 @@ return function(opts)
 
 			local file_mode = search == ""
 			local args = { "rg" }
+			vim.list_extend(args, utils.dotfiles_rg_args())
 
 			if file_mode then
 				table.insert(args, "--files")

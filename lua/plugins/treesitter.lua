@@ -1,3 +1,32 @@
+local barbecue_contexts = {
+	"file",
+	"module",
+	"namespace",
+	"package",
+	"class",
+	"method",
+	"property",
+	"field",
+	"constructor",
+	"enum",
+	"interface",
+	"function",
+	"variable",
+	"constant",
+	"string",
+	"number",
+	"boolean",
+	"array",
+	"object",
+	"key",
+	"null",
+	"enum_member",
+	"struct",
+	"event",
+	"operator",
+	"type_parameter",
+}
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -113,6 +142,22 @@ return {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons",
 		},
-		opts = {},
+		opts = function()
+			local theme = {
+				normal = { fg = "#928374" },
+				ellipsis = { fg = "#665c54" },
+				separator = { fg = "#3c3836" },
+				modified = { fg = "#e78a4e" },
+				dirname = { fg = "#928374" },
+				basename = { fg = "#ebdbb2", bold = true },
+				context = { fg = "#a89984" },
+			}
+
+			for _, name in ipairs(barbecue_contexts) do
+				theme["context_" .. name] = { fg = "#a89984" }
+			end
+
+			return { theme = theme }
+		end,
 	},
 }

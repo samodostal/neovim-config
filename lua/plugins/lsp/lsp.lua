@@ -67,8 +67,8 @@ return {
 					end
 
 					k("gd", function() require("telescope.builtin").lsp_definitions() end)
-					k("gr", function() Snacks.picker.lsp_references() end)
-					k("gR", function() Snacks.picker.grep_word() end)
+					k("gr", function() require("telescope.builtin").lsp_references() end)
+					k("gR", function() require("telescope.builtin").grep_string() end)
 					k("gD", vim.lsp.buf.declaration)
 					k("gi", vim.lsp.buf.implementation)
 					k("gy", vim.lsp.buf.type_definition)

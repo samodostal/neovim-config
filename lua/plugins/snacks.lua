@@ -7,10 +7,17 @@ return {
 		lazy = false,
 		opts = {
 			bigfile = { enabled = true },
+			image = { enabled = true },
 			notifier = { enabled = true },
 			input = { enabled = true },
+			picker = { enabled = false },
 			lazygit = {
+				configure = true,
 				win = {
+					wo = {
+						winblend = 0,
+						winhighlight = "Normal:Normal,NormalNC:Normal,NormalFloat:Normal,FloatBorder:FloatBorder,WinBar:WinBar,WinBarNC:WinBarNC",
+					},
 					keys = {
 						term_normal = false,
 						hide = {
@@ -36,7 +43,6 @@ return {
 			{ "<leader>go", function() Snacks.gitbrowse() end, desc = "Git Browse" },
 			{ "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 			{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-			{ "<leader>y", function() Snacks.picker.registers() end, desc = "Registers" },
 			{ "<leader>ns", function() Snacks.notifier.show_history() end, desc = "Show notifier history" },
 			{ "<leader>nh", function() Snacks.notifier.hide() end, desc = "Hide notifications" },
 			{ "<leader>rf", function() Snacks.rename.rename_file() end, desc = "LSP Rename file" },

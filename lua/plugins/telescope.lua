@@ -34,6 +34,7 @@ local ignored_files = {
 
 local file_ignore_patterns = {}
 local ignore_globs = {}
+local utils = require "core.utils"
 
 for _, dir in ipairs(ignored_dirs) do
 	local escaped = vim.pesc(dir)
@@ -77,7 +78,17 @@ return {
 				},
 				find_files = {
 					file_ignore_patterns = {},
-					find_command = function() return vim.list_extend({ "rg", "--files" }, ignore_globs) end,
+					find_command = function()
+						local cmd = { "rg", "--files" }
+						vim.list_extend(cmd, utils.dotfiles_rg_args())
+						return vim.list_extend(cmd, ignore_globs)
+					end,
+				},
+				live_grep = {
+					additional_args = utils.dotfiles_rg_args,
+				},
+				grep_string = {
+					additional_args = utils.dotfiles_rg_args,
 				},
 			},
 		},
@@ -92,11 +103,17 @@ return {
 			{ "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Telescope ripgrep word under cursor" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope ripgrep help files" },
 			{ "<leader>fc", "<cmd>Telescope resume<cr>", desc = "Telescope previous picker" },
+			{ "<leader>y", "<cmd>Telescope registers<cr>", desc = "Telescope registers" },
 		},
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "make",
 		config = function() require("telescope").load_extension "fzf" end,
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = function() require("telescope").load_extension "ui-select" end,
 	},
 }
