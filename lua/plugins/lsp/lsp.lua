@@ -23,19 +23,7 @@ return {
 				},
 			}
 
-			vim.lsp.enable "gdscript"
-
-			vim.api.nvim_create_autocmd({ "BufEnter", "InsertEnter" }, {
-				callback = function(args)
-					if vim.bo[args.buf].filetype ~= "gdscript" then
-						return
-					end
-					if next(vim.lsp.get_clients { bufnr = args.buf }) ~= nil then
-						return
-					end
-					vim.schedule(function() vim.lsp.enable "gdscript" end)
-				end,
-			})
+			require("plugins.lsp.gdscript").setup()
 
 			vim.diagnostic.config {
 				signs = false,

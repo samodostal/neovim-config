@@ -10,7 +10,7 @@ local keymap = {
 	["<C-n>"] = { "show", "select_next", "fallback" },
 	["<C-p>"] = { "show", "select_prev", "fallback" },
 	["<C-Space>"] = { "show", "fallback" },
-	["<C-e>"] = { "hide", "fallback" },
+	["<C-e>"] = { "cancel", "fallback" },
 	["<C-d>"] = { "scroll_documentation_down", "fallback" },
 	["<C-u>"] = { "scroll_documentation_up", "fallback" },
 	["<Tab>"] = { "snippet_forward", "fallback" },
@@ -90,7 +90,7 @@ return {
 
 					selection = {
 						preselect = true,
-						auto_insert = false,
+						auto_insert = true,
 					},
 
 					cycle = {

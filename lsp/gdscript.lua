@@ -1,5 +1,7 @@
+local gdscript = require "plugins.lsp.gdscript"
+
 return {
-	cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+	cmd = vim.lsp.rpc.connect(gdscript.host, gdscript.port),
 	filetypes = { "gdscript", "gdshader" },
 	root_markers = { "project.godot", ".git" },
 }

@@ -10,7 +10,7 @@ map("n", "<C-d>", "<C-d>")
 map("v", "<C-i>", "<C-u>")
 map("v", "<C-d>", "<C-d>")
 
-map("n", "<leader>t", ":b#<cr>")
+map("n", "<leader>t", ":tabnext<cr>")
 
 map(
 	"n",

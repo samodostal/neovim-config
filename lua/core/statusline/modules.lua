@@ -62,9 +62,9 @@ M.git = function()
 
 	local git_status = vim.b.gitsigns_status_dict
 
-	local added = (git_status.added and git_status.added ~= 0) and (" 󰐕 " .. git_status.added) or ""
-	local changed = (git_status.changed and git_status.changed ~= 0) and (" 󰏫 " .. git_status.changed) or ""
-	local removed = (git_status.removed and git_status.removed ~= 0) and (" 󰍴 " .. git_status.removed) or ""
+	local added = (git_status.added and git_status.added ~= 0) and (" +" .. git_status.added) or ""
+	local changed = (git_status.changed and git_status.changed ~= 0) and (" ~" .. git_status.changed) or ""
+	local removed = (git_status.removed and git_status.removed ~= 0) and (" -" .. git_status.removed) or ""
 
 	if added == "" and changed == "" and removed == "" then
 		return ""
@@ -91,6 +91,26 @@ M.LSP_Diagnostics = function()
 	return s_errors .. s_warnings .. s_hints .. s_info
 end
 
+local lsp_waiting_frames = {}
+for _, codepoint in ipairs { 0x280B, 0x2819, 0x2839, 0x2838, 0x283C, 0x2834, 0x2826, 0x2827, 0x2807, 0x280F } do
+	lsp_waiting_frames[#lsp_waiting_frames + 1] = " " .. vim.fn.nr2char(codepoint)
+end
+
+local function lsp_waiting_glyph()
+	local gdscript = require "plugins.lsp.gdscript"
+	if not gdscript.is_waiting() then
+		return nil
+	end
+
+	local filetype = vim.bo.filetype
+	if filetype ~= "gdscript" and filetype ~= "gdshader" then
+		return nil
+	end
+
+	local frame = math.floor(vim.uv.now() / 100) % #lsp_waiting_frames + 1
+	return lsp_waiting_frames[frame]
+end
+
 M.lsp_status = function()
 	local client_names = ""
 
@@ -104,6 +124,10 @@ M.lsp_status = function()
 				end
 			end
 		end
+	end
+
+	if client_names == "" then
+		client_names = lsp_waiting_glyph() or ""
 	end
 
 	return ("%#StatusLSPStatus#" .. "< " .. client_names .. " /> ")
