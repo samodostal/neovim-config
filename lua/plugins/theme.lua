@@ -36,7 +36,9 @@ local function apply_highlights()
 	set(0, "FlashMatch", { fg = palette.yellow })
 	set(0, "FlashCurrent", { fg = palette.yellow })
 	set(0, "FlashLabel", { fg = palette.aqua })
-	set(0, "LocalHighlight", { fg = palette.fg, bg = palette.bg3 })
+	set(0, "LspReferenceText", { bg = palette.bg3 })
+	set(0, "LspReferenceRead", { bg = palette.bg3 })
+	set(0, "LspReferenceWrite", { bg = palette.bg3, underline = true })
 
 	set(0, "CursorLine", { bg = "NONE" })
 	set(0, "CursorColumn", { bg = palette.bg1 })
@@ -89,11 +91,11 @@ local function apply_highlights()
 	local syntax = {
 		["@variable"] = palette.fg,
 		["@variable.builtin"] = palette.fg,
-		["@variable.parameter"] = palette.fg,
-		["@variable.member"] = palette.fg,
-		["@property"] = palette.fg,
-		["@field"] = palette.fg,
-		["@parameter"] = palette.fg,
+		["@variable.parameter"] = palette.orange,
+		["@variable.member"] = palette.blue,
+		["@property"] = palette.blue,
+		["@field"] = palette.blue,
+		["@parameter"] = palette.orange,
 		["@operator"] = palette.fg,
 		["@punctuation.bracket"] = palette.gray,
 		["@punctuation.delimiter"] = palette.gray,
@@ -118,6 +120,16 @@ local function apply_highlights()
 		["@label"] = palette.fg,
 		["@comment"] = palette.gray,
 		["@comment.documentation"] = palette.gray,
+		["@lsp.type.variable"] = palette.fg,
+		["@lsp.type.parameter"] = palette.orange,
+		["@lsp.type.property"] = palette.blue,
+		["@lsp.typemod.variable.defaultLibrary"] = palette.aqua,
+		["@lsp.type.function"] = palette.green,
+		["@lsp.type.method"] = palette.green,
+		["@lsp.type.class"] = palette.aqua,
+		["@lsp.type.keyword"] = palette.red,
+		["@lsp.type.string"] = palette.yellow,
+		["@lsp.type.number"] = palette.fg,
 		Comment = palette.gray,
 		Identifier = palette.fg,
 		Function = palette.green,
@@ -173,15 +185,6 @@ return {
 			vim.cmd.colorscheme "gruvbox-material"
 			apply_highlights()
 		end,
-	},
-	{
-		"tzachar/local-highlight.nvim",
-		opts = {
-			animate = {
-				enabled = false,
-			},
-			debounce_timeout = 0,
-		},
 	},
 	{
 		"norcalli/nvim-colorizer.lua",

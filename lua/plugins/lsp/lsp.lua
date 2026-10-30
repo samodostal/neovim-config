@@ -41,15 +41,40 @@ return {
 
 					if client then
 						client.server_capabilities.documentFormattingProvider = false
-						client.server_capabilities.semanticTokensProvider = nil
 					end
-
-					if vim.b[args.buf].lsp_keymaps_set then
-						return
-					end
-					vim.b[args.buf].lsp_keymaps_set = true
 
 					local buf = args.buf
+
+					if not vim.b[buf].lsp_highlight_set then
+						vim.b[buf].lsp_highlight_set = true
+
+						vim.api.nvim_create_autocmd("CursorHold", {
+							buffer = buf,
+							callback = function()
+								local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+								local last = vim.b[buf].lsp_highlight_pos
+								if last and last[1] == row and last[2] == col then
+									return
+								end
+								vim.b[buf].lsp_highlight_pos = { row, col }
+								vim.lsp.buf.document_highlight()
+							end,
+						})
+
+						vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+							buffer = buf,
+							callback = function()
+								vim.b[buf].lsp_highlight_pos = nil
+								vim.lsp.buf.clear_references()
+							end,
+						})
+					end
+
+					if vim.b[buf].lsp_keymaps_set then
+						return
+					end
+					vim.b[buf].lsp_keymaps_set = true
+
 					local k = function(lhs, rhs)
 						vim.keymap.set("n", lhs, rhs, { buffer = buf, silent = true, noremap = true })
 					end
