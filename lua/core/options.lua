@@ -47,6 +47,9 @@ opt.listchars:append "eol:↴"
 opt.conceallevel = 0
 opt.statusline = "%!v:lua.require('core.statusline').setup()"
 
+opt.showtabline = 1
+opt.tabline = "%!v:lua.require('core.tabline').setup()"
+
 -- formatoptions overriden by ftplugin (:verbose set formatoptions)
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function() opt.formatoptions:remove "o" end,

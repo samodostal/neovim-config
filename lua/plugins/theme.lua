@@ -7,12 +7,12 @@ local palette = {
 	fg = "#ebdbb2",
 	fg0 = "#fbf1c7",
 	gray = "#928374",
-	red = "#f2594b",
-	orange = "#f28534",
-	yellow = "#e9b143",
-	green = "#b0b846",
-	aqua = "#8bba7f",
-	blue = "#80aa9e",
+	red = "#fb4934",
+	orange = "#fe8019",
+	yellow = "#fabd2f",
+	green = "#b8bb26",
+	aqua = "#8ec07c",
+	blue = "#83a598",
 	purple = "#d3869b",
 }
 
@@ -52,6 +52,10 @@ local function apply_highlights()
 	set(0, "StatusLineTermNC", { fg = "#665c54" })
 	set(0, "WinBar", { fg = palette.gray })
 	set(0, "WinBarNC", { fg = "#665c54" })
+
+	set(0, "TabLine", { fg = palette.gray, bg = "NONE" })
+	set(0, "TabLineSel", { fg = palette.fg, bold = true, bg = "NONE" })
+	set(0, "TabLineFill", { bg = "NONE" })
 
 	set(0, "ST_EmptySpace", { bg = "NONE" })
 	set(0, "StatusFileInfo", { fg = palette.fg })
@@ -159,7 +163,7 @@ return {
 			vim.o.background = "dark"
 
 			vim.g.gruvbox_material_background = "medium"
-			vim.g.gruvbox_material_foreground = "mix"
+			vim.g.gruvbox_material_foreground = "original"
 			vim.g.gruvbox_material_transparent_background = 2
 			vim.g.gruvbox_material_disable_italic_comment = 1
 			vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
